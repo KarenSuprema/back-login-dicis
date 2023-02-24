@@ -2,10 +2,12 @@
 //Que servidor web se va a usar 'configuracion del servidor'
 const express = require('express')
 //La BD que se va a usar es moongos
+const mongoose = require('mongoose')
 //Validacion de los datos de la petición
 const bodyParser = require('body-parser')
 //Para usar el archivo .env va a tener a toda ala configuracion de visual studio
 // require('.dotenv').config()
+require('dotenv').config()
 
 const app = express()
 
@@ -16,11 +18,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 
-const { Mongoose, default: mongoose } = require("mongoose");
+//const { Mongoose, default: mongoose } = require("mongoose");
 
 //Conexiona la base de datos 
-const url =`mongodb+srv://:@cluster0.wyychmm.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
-Mongoose.connect(url, {
+const url = `mongodb+srv://SuperKaren:44153246@cluster0.irae5sd.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
+//`mongodb+srv://SuperKaren:44153246@cluster0.gbiywla.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
+
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('Conectado a la BD'))
@@ -29,7 +33,7 @@ Mongoose.connect(url, {
 //creacion e importacion de rutas 
 //Importacion de rutas 
 
-const authRoutes = require('/routes/auth')
+const authRoutes = require('./routes/auth')
 
 //ruta del middleware
 //Crear el intermediario. este va enmedio del back y el front para que no exista conexión directa

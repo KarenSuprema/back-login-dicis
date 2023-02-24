@@ -14,15 +14,23 @@ const userSchema = mongoose.Schema({
     },
     amaterno: {
         type: String,
-        required: true
+        required: true,
+        max:255
     },
-    passwod: {
+    email: {
+        type: String,
+        required: true, 
+        max:255
+    },
+    password: {
         type: String,
         required: true,
         min:6
     },
     date: {
-            type: date,
-            default: date.now
+            type: Date,
+            //Agrega la fecha y hora actual por defecto
+            default: Date.now
     }
         })
+        module.exports = mongoose.model('user', userSchema)
